@@ -1,5 +1,6 @@
 <?php
 use function DI\autowire;
+use function DI\create;
 use function DI\get;
 use League\Plates\Engine;
 use Monolog\Handler\StreamHandler;
@@ -16,11 +17,6 @@ return [
     // Variables
     'template.path' => __DIR__ . '/Views',
 
-    // Zend Response
-    Psr\Http\Message\ResponseInterface::class => function () {
-        return new Response();
-    },
-
     // Monolog
     Psr\Log\LoggerInterface::class => function () {
         $logger = new Logger('mylog');
@@ -33,16 +29,17 @@ return [
     },
 
     // Database Connection
-    PgKit\Core\Connection::class => autowire()->constructor(
+    PgKit\Core\Connection::class => create()->constructor(
         get('db.dsn'),
         get('db.user'),
         get('db.password'),
         get('db.options')),
 
     // Plates Template Engine
-    League\Plates\Engine::class => autowire()->constructor(get('template.path')),
+    League\Plates\Engine::class => create()->constructor(get('template.path')),
 
-    // All Controllers
-    PgKit\Controllers\IndexController::class => autowire(),
-    PgKit\Controllers\HomeController::class => autowire(),
+    // Zend Response
+    Psr\Http\Message\ResponseInterface::class => function () {
+        return new Response();
+    },
 ];

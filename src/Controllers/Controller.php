@@ -27,6 +27,8 @@ abstract class Controller
         $this->connection = $connection;
         $this->template = $template;
         $this->response = $response;
+
+        $this->template->addData(['databases' => $this->getDatabases()]);
     }
 
     /**

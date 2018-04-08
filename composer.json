@@ -3,13 +3,17 @@
     "description": "php-pgkit is a web-based administration tool for PostgreSQL",
     "type": "project",
     "require": {
+        "league/plates": "^3.3",
         "middlewares/fast-route": "^1.0",
         "middlewares/request-handler": "^1.1",
+        "middlewares/response-time": "^1.0",
         "monolog/monolog": "^1.23",
         "php-di/php-di": "^6.0",
         "relay/relay": "2.x@dev",
         "zendframework/zend-diactoros": "^1.7",
-        "league/plates": "^3.3"
+        "middlewares/robots": "^1.0",
+        "middlewares/encoder": "^1.0",
+        "middlewares/minifier": "^1.0"
     },
     "autoload": {
         "psr-4": {

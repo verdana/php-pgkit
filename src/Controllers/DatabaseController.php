@@ -5,11 +5,11 @@ use League\Plates\Engine;
 use PgKit\Core\Connection;
 use Psr\Http\Message\ResponseInterface;
 
-class HomeController extends BaseController
+class DatabaseController extends BaseController
 {
     public function __invoke(): ResponseInterface
     {
-        $this->render('home');
+        $this->render('database');
         return $this->response;
     }
 }
