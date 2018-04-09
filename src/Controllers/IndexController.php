@@ -5,13 +5,14 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * 首页控制器
+ * 默认情况下显示登陆页面，如果用户已经登录
+ * 则跳转到主页
  */
 class IndexController extends BaseController
 {
     public function __invoke(): ResponseInterface
     {
-        // TODO 先暂时重定向，等待权限系统
-        header('Location: /home', true, 302);
-        exit;
+        $this->render('login');
+        return $this->response;
     }
 }

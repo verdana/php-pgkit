@@ -1,7 +1,7 @@
 <?php
 declare (strict_types = 1);
 
-namespace PgKit\Core;
+namespace PgKit\Postgres;
 
 use PDO;
 use PDOException;
@@ -13,15 +13,30 @@ class Connection
 {
     /** @var array */
     private $params;
+
     /** @var array */
     private $options;
+
     /** @var PDO */
     private $pdo;
+
+    /** @var Connection */
+    private static $instance;
+
+    /** 禁用 __sleep */
+    private function __sleep()
+    {}
+    /** 禁用 __wakeup */
+    private function __wakeup()
+    {}
+    /** 禁用 __clone */
+    private function __clone()
+    {}
 
     /**
      * 构造函数收集参数
      */
-    public function __construct(string $dsn, string $user = null, string $password = null, array $options = null)
+    private function __construct(string $dsn, string $user, string $password, array $options)
     {
         $this->params = [$dsn, $user, $password];
         $this->options = (array) $options;
@@ -29,6 +44,17 @@ class Connection
         if (empty($options['lazy'])) {
             $this->connect();
         }
+    }
+
+    /**
+     * 初始化单一实例
+     */
+    public static function getInstance(string $dsn, string $user = null, string $password = null, array $options = null): Connection
+    {
+        if (null === static::$instance) {
+            static::$instance = new static($dsn, $user, $password, $options);
+        }
+        return static::$instance;
     }
 
     /**
@@ -43,7 +69,6 @@ class Connection
         try {
             $this->pdo = new PDO($this->params[0], $this->params[1], $this->params[2], $this->options);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
         } catch (PDOException $e) {
             throw $e;
         }
@@ -55,6 +80,15 @@ class Connection
     public function disconnect(): void
     {
         $this->pdo = null;
+    }
+
+    /**
+     * 重新连接
+     */
+    public function reconnect(): void
+    {
+        $this->disconnect();
+        $this->connect();
     }
 
     /** @return string */

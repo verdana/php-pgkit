@@ -1,15 +1,35 @@
 <?php
+declare(strict_types=1);
+
 namespace PgKit\Controllers;
 
 use League\Plates\Engine;
-use PgKit\Core\Connection;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class DatabaseController extends BaseController
 {
-    public function __invoke(): ResponseInterface
+    /**
+     * 获取所有的数据库列表
+     */
+    protected function tables(): array
     {
-        $this->render('database');
+        $sql = "SELECT * FROM pg_tables
+                WHERE schemaname NOT in('information_schema', 'pg_catalog')
+                ORDER BY schemaname, tablename";
+
+        $sth = $this->getPDO()->prepare($sql);
+        $sth->execute();
+
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * 自动调用
+     */
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    {
+        $this->render('database', ['tables' => $this->tables()]);
         return $this->response;
     }
 }

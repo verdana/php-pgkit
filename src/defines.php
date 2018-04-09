@@ -5,19 +5,17 @@ use function DI\get;
 use League\Plates\Engine;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use PgKit\Postgres\PDO;
 use Zend\Diactoros\Response;
 
 return [
-    // PostgreSQL
-    'db.dsn' => getenv('PG_DSN'),
+    // 数据库连接参数
+    'db.dsn' => PDO::buildDSN(),
     'db.user' => getenv('PG_USER'),
     'db.password' => getenv('PG_PASSWORD'),
     'db.options' => [],
 
-    // Variables
-    'template.path' => __DIR__ . '/Views',
-
-    // Monolog
+    // 日志
     Psr\Log\LoggerInterface::class => function () {
         $logger = new Logger('mylog');
 
@@ -28,17 +26,18 @@ return [
         return $logger;
     },
 
-    // Database Connection
-    PgKit\Core\Connection::class => create()->constructor(
-        get('db.dsn'),
-        get('db.user'),
-        get('db.password'),
-        get('db.options')),
+    // PDO 数据库连接
+    // PgKit\Postgres\Connection::class => create()->constructor(
+    //     get('db.dsn'),
+    //     get('db.user'),
+    //     get('db.password'),
+    //     get('db.options')),
 
-    // Plates Template Engine
+    // 模板引擎
+    'template.path' => __DIR__ . '/Views',
     League\Plates\Engine::class => create()->constructor(get('template.path')),
 
-    // Zend Response
+    // Zend 响应对象
     Psr\Http\Message\ResponseInterface::class => function () {
         return new Response();
     },

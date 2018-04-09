@@ -1,7 +1,7 @@
 <?php
-namespace PgKit\Controllers;
+declare(strict_types=1);
 
-use PDO;
+namespace PgKit\Controllers;
 
 /**
  * 基础控制器
@@ -12,11 +12,19 @@ class BaseController extends Controller
     /**
      * 读取数据库列表和数据表列表
      */
-    public function getDatabases()
+    protected function getDatabases(): array
     {
-        $sql = "SELECT * FROM pg_database";
+        $sql = "SELECT * FROM pg_database WHERE datistemplate = false";
         $sth = $this->getPDO()->prepare($sql);
         $sth->execute();
-        return $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * 读取数据库下的所有数据表
+     */
+    protected function getTables(): array
+    {
+
     }
 }
