@@ -59,7 +59,17 @@
             </div> <!-- sidebar -->
 
             <div class="content-padder content-background">
-            <?php var_dump($databases) ?>
+                <ul class="uk-breadcrumb">
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><span></span></li>
+                </ul>
+                <ul uk-tab>
+                    <li class="uk-active"><a href="">结构</a></li>
+                    <li><a href="">数据</a></li>
+                    <li class="uk-disabled"><a>备份</a></li>
+                </ul>
+                <?php var_dump($databases) ?>
             </div>
         </div>
     </body>
