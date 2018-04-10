@@ -1,5 +1,6 @@
 <?php
 use League\Plates\Engine;
+use Middlewares\ErrorHandler;
 use Middlewares\FastRoute;
 use Middlewares\GzipEncoder;
 use Middlewares\RequestHandler;
@@ -18,7 +19,7 @@ $container = require_once dirname(__DIR__) . '/src/bootstrap.php';
 // 加载路由定义
 $dispatcher = require_once dirname(__DIR__) . '/src/routes.php';
 
-// 使用 PSR-11 容器创建 request handlers 的实例
+// 使用 PSR-11 容器存储 request handlers 的实例
 // 这里的三个参数会被用来创建路由器配置的类实例，也就是各种控制器
 $requestHandlerContainer = new RequestHandlerContainer([
     // $container->get(Connection::class),
@@ -28,6 +29,9 @@ $requestHandlerContainer = new RequestHandlerContainer([
 
 // PSR-15 请求分发器以及中间件
 $relay = new Relay([
+    // 记录错误
+    (new ErrorHandler())->catchExceptions(true),
+
     // 记录请求时间
     new ResponseTime(),
 

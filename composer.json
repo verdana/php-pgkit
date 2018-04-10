@@ -13,7 +13,8 @@
         "zendframework/zend-diactoros": "^1.7",
         "middlewares/robots": "^1.0",
         "middlewares/encoder": "^1.0",
-        "middlewares/minifier": "^1.0"
+        "middlewares/minifier": "^1.0",
+        "middlewares/error-handler": "^1.0"
     },
     "autoload": {
         "psr-4": {
