@@ -9,9 +9,8 @@
                     <div class="uk-card-body">
                         <center> <h2>PHP PostgreSQL Kit</h2> </center>
                         <br/>
-                        <form method="POST" data-bitwarden-watching="1">
+                        <form method="POST" action="/login" data-bitwarden-watching="1">
                             <fieldset class="uk-fieldset">
-
                                 <div class="uk-margin">
                                     <div class="uk-position-relative">
                                         <span class="uk-form-icon" uk-icon="icon: user"></span>
@@ -40,8 +39,6 @@
                                         </button>
                                     </center>
                                 </div>
-
-
                             </fieldset>
                         </form>
                     </div>
