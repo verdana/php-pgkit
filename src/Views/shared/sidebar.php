@@ -5,9 +5,13 @@
         <li class="uk-nav-header">
             <a href="/db/<?= $db['datname'] ?>"><?= $db['datname'] ?></a>
         </li>
-        <li><a href="buttons.html">Buttons</a></li>
-        <li><a href="components.html">Components</a></li>
-        <li><a href="tables.html">Tables</a></li>
+        <?php if ($dbname == $db['datname']): ?>
+        <ul>
+            <?php foreach ($tables as $tbl): ?>
+            <li><a href="/db/<?= $db['datname'] ?>?tbl=<?= $tbl['tablename'] ?>"><?= $tbl['tablename'] ?></a></li>
+            <?php endforeach ?>
+        </ul>
+        <?php endif ?>
         <?php endforeach ?>
     </ul>
 </div> <!-- sidebar -->

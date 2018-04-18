@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 abstract class Controller
 {
     /** @var Connection */
-    protected $connection;
+    protected static $connection;
 
     /** @var Engine */
     protected $template;
@@ -28,8 +28,6 @@ abstract class Controller
     {
         $this->response = $response;
         $this->template = $template;
-
-        // $this->template->addData(['databases' => $this->getDatabases()]);
     }
 
     /**
@@ -46,9 +44,15 @@ abstract class Controller
     }
 
     /** @return Connection */
-    public function getConnection(): Connection
+    public static function getConnection(): Connection
     {
-        return $this->connection;
+        return self::$connection;
+    }
+
+    /** @return void */
+    public static function setConnection(Connection $conn): void
+    {
+        self::$connection = $conn;
     }
 
     /** @return PDO */

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace PgKit\Postgres;
 
@@ -11,10 +11,10 @@ class PDO
     /**
      * 帮助创建一个合法的 DSN 字串
      */
-    public static function buildDSN(): string
+    public static function buildDSN(string $dbname = null): string
     {
         $host = getenv('PG_HOST');
-        $dbname = getenv('PG_DBNAME');
+        $dbname = $dbname ?? (getenv('PG_DBNAME') ?? 'postgres');
 
         $dsn = "pgsql:host=%s;dbname=%s";
         return sprintf($dsn, $host, $dbname);
