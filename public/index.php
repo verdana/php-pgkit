@@ -7,7 +7,6 @@ use Middlewares\RequestHandler;
 use Middlewares\ResponseTime;
 use Middlewares\Robots;
 use Middlewares\Utils\RequestHandlerContainer;
-use PgKit\Postgres\Connection;
 use PgKit\Middlewares\ConnectDB;
 use Psr\Http\Message\ResponseInterface;
 use Relay\Relay;

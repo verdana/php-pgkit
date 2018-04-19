@@ -13,9 +13,7 @@ class DatabaseController extends BaseController
      */
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        // dbname store in template shared data
-        $dbname = $request->getAttribute('dbname');
-        $this->getTemplate()->addData(['dbname' => $dbname]);
+        $this->currentDbname($request);
 
         // URL 中的参数
         $qs = $request->getQueryParams();

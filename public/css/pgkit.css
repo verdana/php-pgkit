@@ -62,7 +62,7 @@ body {
     bottom: 0;
     box-sizing: border-box;
     width: 240px !important;
-    padding: 40px 40px 60px 40px;
+    padding: 20px 20px 60px 20px;
     border-right: 1px #e5e5e5 solid;
     overflow-y: auto;
     overflow-x: hidden;
@@ -113,7 +113,7 @@ body {
         left: calc(100% + 0px);
     }
     .tm-sidebar-left+.tm-main {
-        padding-left: 40px;
+        padding-left: 20px;
         opacity: 0 !important;
     }
 }
@@ -121,7 +121,6 @@ body {
 @media (min-width: 1400px) {
     .tm-sidebar-left {
         width: 300px !important;
-        padding: 45px 45px 60px 45px
     }
     .tm-sidebar-right {
         left: calc(100% + 60px)

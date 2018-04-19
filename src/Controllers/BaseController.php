@@ -5,6 +5,7 @@ namespace PgKit\Controllers;
 
 use League\Plates\Engine;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * 基础控制器
@@ -48,5 +49,14 @@ class BaseController extends Controller
         $sth = $this->getPDO()->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * 从当前 URL 中读取 dbname，并设置到模板中
+     */
+    protected function currentDbname(ServerRequestInterface $request): void
+    {
+        $dbname = $request->getAttribute('dbname');
+        $this->getTemplate()->addData(['dbname' => $dbname]);
     }
 }

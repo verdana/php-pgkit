@@ -4,13 +4,13 @@ declare (strict_types = 1);
 namespace PgKit\Middlewares;
 
 use DI\Container;
+use PgKit\Controllers\Controller;
+use PgKit\Postgres\Connection;
 use PgKit\Postgres\PDO;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use PgKit\Postgres\Connection;
-use PgKit\Controllers\Controller;
 
 class ConnectDB implements MiddlewareInterface
 {

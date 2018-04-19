@@ -15,8 +15,6 @@ class PDO
     {
         $host = getenv('PG_HOST');
         $dbname = $dbname ?? (getenv('PG_DBNAME') ?? 'postgres');
-
-        $dsn = "pgsql:host=%s;dbname=%s";
-        return sprintf($dsn, $host, $dbname);
+        return sprintf("pgsql:host=%s;dbname=%s", $host, $dbname);
     }
 }

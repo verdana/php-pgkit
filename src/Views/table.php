@@ -13,32 +13,34 @@
         <li><a href="">数据</a></li>
         <li class="uk-disabled"><a>备份</a></li>
     </ul>
-    <table class="tm-table uk-table uk-table-divider uk-table-small uk-table-responsive">
-        <thead>
-            <tr>
-                <th>Schema</th>
-                <th>Table</th>
-                <th>Owner</th>
-                <th>Space</th>
-                <th>Index</th>
-                <th>Rules</th>
-                <th>Triggers</th>
-                <th>Row Security</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($tables as $table): ?>
-            <tr>
-                <td><?= $table['schemaname'] ?></td>
-                <td><?= $table['tablename'] ?></td>
-                <td><?= $table['tableowner'] ?></td>
-                <td><?= $table['tablespace'] ?></td>
-                <td><?= $table['hasindexes'] ?></td>
-                <td><?= $table['hasrules'] ?></td>
-                <td><?= $table['hastriggers'] ?></td>
-                <td><?= $table['rowsecurity'] ?></td>
-            </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+    <div class="uk-overflow-auto">
+        <table class="tm-table uk-table uk-table-divider uk-table-small uk-table-responsive">
+            <thead>
+                <tr>
+                    <th>Schema</th>
+                    <th>Table</th>
+                    <th>Owner</th>
+                    <th>Space</th>
+                    <th>Index</th>
+                    <th>Rules</th>
+                    <th>Triggers</th>
+                    <th>Row Security</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($tables as $table): ?>
+                <tr>
+                    <td><?= $table['schemaname'] ?></td>
+                    <td><?= $table['tablename'] ?></td>
+                    <td><?= $table['tableowner'] ?></td>
+                    <td><?= $table['tablespace'] ?></td>
+                    <td><?= $table['hasindexes'] ?></td>
+                    <td><?= $table['hasrules'] ?></td>
+                    <td><?= $table['hastriggers'] ?></td>
+                    <td><?= $table['rowsecurity'] ?></td>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
 </div>
