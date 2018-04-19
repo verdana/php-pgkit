@@ -33,7 +33,11 @@ $config = [
 
     // 模板引擎
     'template.path' => __DIR__ . '/Views',
-    League\Plates\Engine::class => create()->constructor(get('template.path')),
+    League\Plates\Engine::class => function(Psr\Container\ContainerInterface $c) {
+        $template = new League\Plates\Engine($c->get('template.path'));
+        $template->loadExtension(new PgKit\Functions\PrintColumn);
+        return $template;
+    },
 
     // Zend 响应对象
     Psr\Http\Message\ResponseInterface::class => function () {

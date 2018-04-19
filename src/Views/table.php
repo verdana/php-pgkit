@@ -17,27 +17,26 @@
         <table class="tm-table uk-table uk-table-divider uk-table-small uk-table-responsive">
             <thead>
                 <tr>
-                    <th>Schema</th>
-                    <th>Table</th>
-                    <th>Owner</th>
-                    <th>Space</th>
-                    <th>Index</th>
-                    <th>Rules</th>
-                    <th>Triggers</th>
-                    <th>Row Security</th>
+                    <th>Column</th>
+                    <th>Type</th>
+                    <th>collation_name</th>
+                    <th>Nullable</th>
+                    <th>Default</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($tables as $table): ?>
+                <?php foreach ($columns as $col): ?>
                 <tr>
-                    <td><?= $table['schemaname'] ?></td>
-                    <td><?= $table['tablename'] ?></td>
-                    <td><?= $table['tableowner'] ?></td>
-                    <td><?= $table['tablespace'] ?></td>
-                    <td><?= $table['hasindexes'] ?></td>
-                    <td><?= $table['hasrules'] ?></td>
-                    <td><?= $table['hastriggers'] ?></td>
-                    <td><?= $table['rowsecurity'] ?></td>
+                    <td><?= $col['column_name']         ?></td>
+                    <td><?= $this->column_type($col)    ?></td>
+                    <td><?= $col['collation_name']      ?></td>
+                    <td><?= $this->column_isnull($col)  ?></td>
+                    <td><?= $col['column_default']      ?></td>
+                    <td>
+                        <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="file-edit"></a>
+                        <a href="#" class="uk-icon-link" uk-icon="trash"></a>
+                    </td>
                 </tr>
                 <?php endforeach ?>
             </tbody>

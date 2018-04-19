@@ -1,5 +1,5 @@
 <!-- sidebar -->
-<div id="sidebar" class="tm-sidebar-left uk-background-default" aria-hidden="false">
+<div id="sidebar" class="tm-sidebar-left uk-background-default">
     <ul class="uk-nav uk-nav-default">
         <?php foreach($databases as $db): ?>
         <li class="uk-nav-header">

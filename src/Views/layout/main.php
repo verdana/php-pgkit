@@ -8,8 +8,7 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="stylesheet" href="/dist/css/uikit.min.css">
         <link rel="stylesheet" href="/css/pgkit.css">
-        <link rel="stylesheet" href="/css/notyf.min.css">
-        <script src="/js/jquery.min.js"></script>
+        <script src="/js/jquery-3.3.1.min.js"></script>
         <script src="/dist/js/uikit.min.js"></script>
         <script src="/dist/js/uikit-icons.min.js"></script>
     </head>
@@ -19,14 +18,10 @@
 
         <?=$this->insert('shared/sidebar')?>
 
-        <div class="content-padder content-background">
+        <div class="uk-offcanvas-content content-padder content-background">
             <?=$this->section('content')?>
         </div>
 
-
-        <script src="/js/jquery.transit.js"></script>
-        <script src="/js/notyf.min.js"></script>
         <script src="/js/pgkit.js"></script>
-        <div class="notyf"></div>
     </body>
 </html>
