@@ -23,12 +23,12 @@ class PrintColumn implements ExtensionInterface
     /**
      * 列类型
      */
-    public function column_type($col): string
+    public function column_type($col)
     {
         if ($col['data_type'] == 'numeric') {
             return "$col[data_type] ($col[numeric_precision], $col[numeric_scale])";
         }
-        return $col['data_type'];
+        return $col['data_type'] ?? "";
     }
 
     /**

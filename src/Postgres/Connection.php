@@ -98,7 +98,7 @@ class Connection
     }
 
     /** @return PDO */
-    public function getPdo(): PDO
+    public function getPDO(): PDO
     {
         $this->connect();
         return $this->pdo;
@@ -110,7 +110,7 @@ class Connection
     public function getInsertId(string $sequence = null): string
     {
         try {
-            $res = $this->getPdo()->lastInsertId($sequence);
+            $res = $this->getPDO()->lastInsertId($sequence);
             return $res === false ? '0' : $res;
         } catch (PDOException $e) {
             throw $e;
@@ -123,11 +123,51 @@ class Connection
     public function quote(string $string, int $type = PDO::PARAM_STR): string
     {
         try {
-            return $this->getPdo()->quote($string, $type);
+            return $this->getPDO()->quote($string, $type);
         } catch (PDOException $e) {
             throw $e;
         }
     }
 
-    /********************* shortcuts ****************d*g**/
+    /********************* 快速取得结果的方法 *******************/
+
+    /**
+     * 读取一行数据
+     */
+    public function find(string $sql, array $params = null): array
+    {
+        $sth = $this->getPDO()->prepare($sql);
+        $sth->execute((array) $params);
+        return $sth->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * 读取所有数据
+     */
+    public function findAll(string $sql, array $params = null): array
+    {
+        $sth = $this->getPDO()->prepare($sql);
+        $sth->execute($params);
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * 更新数据
+     */
+    public function update(string $sql, array $data = null): int
+    {
+        $sth = $this->getPDO()->prepare($sql);
+        $sth->execute($params);
+        return $sth->rowCount();
+    }
+
+    /**
+     * 删除数据
+     */
+    public function delete(string $sql): int
+    {
+        $sth = $this->getPDO()->prepare($sql);
+        $sth->execute();
+        return $sth->rowCount();
+    }
 }

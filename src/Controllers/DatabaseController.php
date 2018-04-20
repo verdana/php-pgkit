@@ -31,7 +31,7 @@ class DatabaseController extends BaseController
      */
     protected function showDatabaseStruct(): void
     {
-        $this->render('database');
+        $this->render('database-structure');
     }
 
     /**
@@ -43,10 +43,17 @@ class DatabaseController extends BaseController
                 WHERE table_name LIKE ?
                 ORDER BY ordinal_position ASC";
 
-        $sth = $this->getPDO()->prepare($sql);
-        $sth->execute([$tbl]);
-        $data = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $data = $this->getConnection()->findAll($sql, [$tbl]);
+        $this->render('table-structure', ['columns' => $data]);
+    }
 
-        $this->render('table', ['columns' => $data]);
+    /**
+     * 读取表中的数据
+     */
+    protected function showTableData(string $tbl, int $limit = 20): void
+    {
+        $sql = "SELECT * FROM ?";
+        $data = $this->getConnection()->findAll($sql, $tbl);
+        // $this->
     }
 }

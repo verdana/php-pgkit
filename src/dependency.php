@@ -34,9 +34,10 @@ $config = [
     // 模板引擎
     'template.path' => __DIR__ . '/Views',
     League\Plates\Engine::class => function(Psr\Container\ContainerInterface $c) {
-        $template = new League\Plates\Engine($c->get('template.path'));
-        $template->loadExtension(new PgKit\Functions\PrintColumn);
-        return $template;
+        $engine = new League\Plates\Engine($c->get('template.path'));
+        $engine->loadExtension(new League\Plates\Extension\URI($_SERVER['PATH_INFO']));
+        $engine->loadExtension(new PgKit\Functions\PrintColumn);
+        return $engine;
     },
 
     // Zend 响应对象
