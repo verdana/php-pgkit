@@ -134,21 +134,23 @@ class Connection
     /**
      * 读取一行数据
      */
-    public function find(string $sql, array $params = null): array
+    public function find(string $sql, array $params = null, int $mode = \PDO::FETCH_ASSOC): array
     {
         $sth = $this->getPDO()->prepare($sql);
+        $sth->setFetchMode($mode);
         $sth->execute((array) $params);
-        return $sth->fetch(\PDO::FETCH_ASSOC);
+        return $sth->fetch($mode);
     }
 
     /**
      * 读取所有数据
      */
-    public function findAll(string $sql, array $params = null): array
+    public function findAll(string $sql, array $params = null, int $mode = \PDO::FETCH_ASSOC): array
     {
         $sth = $this->getPDO()->prepare($sql);
-        $sth->execute($params);
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $sth->setFetchMode($mode);
+        $sth->execute((array) $params);
+        return $sth->fetchAll($mode);
     }
 
     /**

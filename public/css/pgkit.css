@@ -96,6 +96,14 @@ body {
     font-size: 13px;
 }
 
+
+/** 表格 **/
+#pg-table th {
+    text-transform: none;
+    font-weight: 600;
+}
+
+
 @media(max-width: 960px) {
     .tm-sidebar-left {
         opacity: 0;

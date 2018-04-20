@@ -1,5 +1,4 @@
 <?php
-use function DI\create;
 use function DI\factory;
 use function DI\get;
 
@@ -16,11 +15,10 @@ $config = [
 
     // PSR-3 Logger
     Psr\Log\LoggerInterface::class => function () {
-        $logger = new Monolog\Logger('mylog');
-
-        $fileHandler = new Monolog\Handler\StreamHandler('../logs/pgkit.log', Monolog\Logger::DEBUG);
-        $fileHandler->setFormatter(new Monolog\Handler\LineFormatter());
-        $logger->pushHandler($fileHandler);
+        $logger = new Monolog\Logger('pgkit');
+        $handler = new Monolog\Handler\StreamHandler('../logs/pgkit.log', Monolog\Logger::DEBUG);
+        $handler->setFormatter(new Monolog\Handler\LineFormatter);
+        $logger->pushHandler($handler);
         return $logger;
     },
 
@@ -33,21 +31,21 @@ $config = [
 
     // 模板引擎
     'template.path' => __DIR__ . '/Views',
-    League\Plates\Engine::class => function(Psr\Container\ContainerInterface $c) {
+    League\Plates\Engine::class => function (Psr\Container\ContainerInterface $c) {
         $engine = new League\Plates\Engine($c->get('template.path'));
-        $engine->loadExtension(new League\Plates\Extension\URI($_SERVER['PATH_INFO']));
+        $engine->loadExtension(new League\Plates\Extension\URI(isset($_SERVER['PATH_INFO']) ?? ''));
         $engine->loadExtension(new PgKit\Functions\PrintColumn);
         return $engine;
     },
 
     // Zend 响应对象
     Psr\Http\Message\ResponseInterface::class => function () {
-        return new Zend\Diactoros\Response();
+        return new Zend\Diactoros\Response;
     },
 ];
 
 // 初始化 PHP-DI 容器
-$builder = new DI\ContainerBuilder();
+$builder = new DI\ContainerBuilder;
 $builder->useAutowiring(false);
 $builder->useAnnotations(false);
 $builder->addDefinitions($config);

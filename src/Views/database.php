@@ -10,8 +10,6 @@
 <div class="uk-section-small uk-section-default">
     <ul uk-tab>
         <li class="uk-active"><a href="">结构</a></li>
-        <li><a href="">数据</a></li>
-        <li class="uk-disabled"><a>备份</a></li>
     </ul>
 
     <div class="uk-overflow-auto">
