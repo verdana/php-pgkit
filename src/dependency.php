@@ -12,6 +12,7 @@ $config = [
     'db.user' => getenv('PG_USER'),
     'db.password' => getenv('PG_PASSWORD'),
     'db.options' => [],
+    'db.charset' => 'utf-8',
 
     // PSR-3 Logger
     Psr\Log\LoggerInterface::class => function () {
@@ -35,6 +36,7 @@ $config = [
         $engine = new League\Plates\Engine($c->get('template.path'));
         $engine->loadExtension(new League\Plates\Extension\URI(isset($_SERVER['PATH_INFO']) ?? ''));
         $engine->loadExtension(new PgKit\Functions\PrintColumn);
+        $engine->loadExtension(new PgKit\Functions\PrintValue);
         return $engine;
     },
 

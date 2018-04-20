@@ -2,8 +2,8 @@
 
 <div class="uk-section-small uk-section-default header">
     <ul class="uk-breadcrumb">
-        <a href="/home" uk-icon="icon: home"></a>
-        <li><span>Postgres</span></li>
+        <li><a href="/home">Home</a></li>
+        <li><span><?= $dbname ?></span></li>
     </ul>
 </div>
 

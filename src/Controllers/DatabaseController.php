@@ -13,7 +13,8 @@ class DatabaseController extends BaseController
      */
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        $this->currentDbname($request);
+        $this->currentDatabase($request);
+        $this->currentTable($request);
 
         // URL 中的参数
         $qs = $request->getQueryParams();

@@ -54,9 +54,20 @@ class BaseController extends Controller
     /**
      * 从当前 URL 中读取 dbname，并设置到模板中
      */
-    protected function currentDbname(ServerRequestInterface $request): void
+    protected function currentDatabase(ServerRequestInterface $request): void
     {
         $dbname = $request->getAttribute('dbname');
         $this->getTemplate()->addData(['dbname' => $dbname]);
+    }
+
+    /**
+     *
+     */
+    protected function currentTable(ServerRequestInterface $request): void
+    {
+        $params = $request->getQueryParams();
+        if (isset($params['tbl'])) {
+            $this->getTemplate()->addData(['tblname' => $params['tbl']]);
+        }
     }
 }

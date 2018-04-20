@@ -22,10 +22,10 @@
                         <tr>
                             <th>Column</th>
                             <th>Type</th>
-                            <th>collation_name</th>
+                            <th>Collation</th>
                             <th>Nullable</th>
                             <th>Default</th>
-                            <th>Action</th>
+                            <th>-</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +48,7 @@
         </li>
         <li>
             <div class="uk-overflow-auto">
-                <table id="pg-table" class="tm-table uk-table uk-table-divider uk-table-small uk-table-responsive">
+                <table class="tm-table uk-table uk-table-divider uk-table-small uk-table-responsive">
                     <thead>
                         <tr>
                             <?php foreach ($columns as $column): ?>
@@ -61,7 +61,7 @@
                         <?php foreach ($rows as $row): ?>
                         <tr>
                             <?php foreach ($columns as $column): ?>
-                            <td><?= $row[$column['column_name']] ?></td>
+                            <td<?= $this->print_tip($row[$column['column_name']]) ?>><?= $this->print_val($row[$column['column_name']]) ?></td>
                             <?php endforeach ?>
                             <td>
                                 <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="file-edit"></a>
