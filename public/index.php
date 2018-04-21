@@ -13,6 +13,17 @@ use Relay\Relay;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\ServerRequestFactory;
 
+// 默认时区
+date_default_timezone_set('PRC');
+
+// 检查必要的扩展
+$extensions = ['PDO', 'pdo_pgsql', 'mbstring'];
+foreach ($extensions as $ext) {
+    if (!extension_loaded($ext)) {
+        exit("Require php extension $ext");
+    }
+}
+
 // 加载引导文件
 $container = require_once dirname(__DIR__) . '/src/dependency.php';
 

@@ -17,9 +17,9 @@ class DatabaseController extends BaseController
         $this->currentTable($request);
 
         // URL 中的参数
-        $qs = $request->getQueryParams();
-        if (!empty($qs['tbl'])) {
-            $this->showTableStruct($qs['tbl']);
+        ['dbname' => $dbname, 'tbname' => $tbname] = $request->getAttributes();
+        if (!empty($tbname)) {
+            $this->showTableStruct($tbname);
         } else {
             $this->showDatabaseStruct();
         }

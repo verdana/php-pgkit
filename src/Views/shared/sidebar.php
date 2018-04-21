@@ -8,7 +8,7 @@
         <?php if ($dbname == $db['datname']): ?>
         <ul>
             <?php foreach ($tables as $tbl): ?>
-            <li><a href="/db/<?= $db['datname'] ?>?tbl=<?= $tbl['tablename'] ?>"><?= $tbl['tablename'] ?></a></li>
+            <li><a href="/db/<?= $db['datname'] ?>/<?= $tbl['tablename'] ?>"><?= $tbl['tablename'] ?></a></li>
             <?php endforeach ?>
         </ul>
         <?php endif ?>

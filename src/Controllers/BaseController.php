@@ -57,17 +57,21 @@ class BaseController extends Controller
     protected function currentDatabase(ServerRequestInterface $request): void
     {
         $dbname = $request->getAttribute('dbname');
+        if (empty($dbname)and isset($_GET['db'])) {
+            ['db' => $dbname] = $request->getQueryParams();
+        }
         $this->getTemplate()->addData(['dbname' => $dbname]);
     }
 
     /**
-     *
+     * 读取表明，设置到模板中
      */
     protected function currentTable(ServerRequestInterface $request): void
     {
-        $params = $request->getQueryParams();
-        if (isset($params['tbl'])) {
-            $this->getTemplate()->addData(['tblname' => $params['tbl']]);
+        $tbname = $request->getAttribute('tbname');
+        if (empty($tbname) and isset($_GET['tbl'])) {
+            ['tbl' => $tbname] = $request->getQueryParams();
         }
+        $this->getTemplate()->addData(['tbname' => $tbname]);
     }
 }

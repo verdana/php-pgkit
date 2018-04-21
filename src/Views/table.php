@@ -8,12 +8,20 @@
     </ul>
 </div>
 
-<div class="uk-section-small uk-section-default">
+<div class="uk-section-default uk-margin uk-position-relative">
     <ul id="table-tabs" uk-tab>
         <li class="uk-active"><a href="#">结构</a></li>
         <li><a href="#">数据</a></li>
         <li><a href="#">备份</a></li>
     </ul>
+
+    <div class="uk-position-top-right uk-margin-small-top uk-margin-right">
+        <ul class="uk-iconnav">
+            <li><a href="/create-table?db=<?= $dbname ?>" uk-icon="icon: plus" uk-tooltip="New table"></a></li>
+            <li><a href="/export?db=<?= $dbname ?>&amp;tbl=<?= $tbname ?>?dump" uk-icon="icon: forward" uk-tooltip="Export table"></a></li>
+        </ul>
+    </div>
+
     <ul class="uk-switcher">
         <li>
             <div class="uk-overflow-auto">
