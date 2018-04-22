@@ -32,8 +32,16 @@ class ConnectDB implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        // 先尝试从 URL 中的查询参数中读取 dbname
+        $params = $request->getQueryParams();
+        $dbname = $params['db'] ?? null;
+
+        // 然后尝试从 route 参数中读取
+        if ($dbname == null) {
+            $dbname = $request->getAttribute('dbname') ?? 'postgres';
+        }
+
         // New PDO Connection DSN
-        $dbname = $request->getAttribute('dbname') ?? 'postgres';
         $dsn = PDO::buildDSN($dbname);
 
         // Now make connection to PostgreSQL
